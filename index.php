@@ -24,7 +24,7 @@ $categorias = $stmt->fetchAll();
     <nav class="navbar">
         <div class="nav-logo">wishlist</div>
         <ul class="nav-links">
-            <li><a href="nova-categoria.php">+ Nova Categoria</a></li>
+            <li><a href="pages/nova-categoria.php">+ Nova Categoria</a></li>
         </ul>
     </nav>
  
@@ -49,9 +49,7 @@ $categorias = $stmt->fetchAll();
     </main>
  
 
-    <footer class="footer">
-        <p>wishlist &mdash; danielly toledo</p>
-    </footer>
+<?php require_once 'includes/footer.php' ?>
  
 </body>
 </html>

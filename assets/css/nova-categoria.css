@@ -1,0 +1,173 @@
+/* =============================================
+   ARQUIVO: css/nova-categoria.css
+   FUNÇÃO: Estilos da página de nova categoria
+   ============================================= */
+
+/* ---- CONTAINER DO FORMULÁRIO ---- */
+.form-container {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 2.5rem 3rem;
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+.form-titulo {
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--cor-branco);
+}
+
+.form-subtitulo {
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 300;
+    margin-top: -1.2rem;
+}
+
+/* ---- MENSAGENS DE FEEDBACK ---- */
+.mensagem {
+    font-size: 0.85rem;
+    padding: 0.9rem 1.1rem;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.mensagem.sucesso {
+    background-color: rgba(100, 220, 150, 0.12);
+    border: 1px solid rgba(100, 220, 150, 0.3);
+    color: #7de0a8;
+}
+
+.mensagem.erro {
+    background-color: rgba(220, 100, 100, 0.12);
+    border: 1px solid rgba(220, 100, 100, 0.3);
+    color: #e08080;
+}
+
+.mensagem-links {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.mensagem-links a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.mensagem-links a:hover {
+    opacity: 0.7;
+}
+
+/* ---- CAMPOS DO FORMULÁRIO ---- */
+.campo-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.campo-label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.campo-input {
+    background-color: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+    color: var(--cor-branco);
+    font-family: var(--fonte-principal);
+    outline: none;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.campo-input::placeholder {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.campo-input:focus {
+    border-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.campo-contador {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.25);
+    text-align: right;
+}
+
+/* ---- BOTÕES DE AÇÃO ---- */
+.form-acoes {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+}
+
+.btn-cancelar {
+    padding: 0.7rem 1.4rem;
+    font-size: 0.85rem;
+    font-family: var(--fonte-principal);
+    color: rgba(255, 255, 255, 0.45);
+    text-decoration: none;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: color 0.2s ease, border-color 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+.btn-cancelar:hover {
+    color: var(--cor-branco);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+.btn-guardar {
+    padding: 0.7rem 1.6rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: var(--fonte-principal);
+    letter-spacing: 0.04em;
+    background-color: var(--cor-branco);
+    color: var(--cor-fundo);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-guardar:hover {
+    background-color: rgba(255, 255, 255, 0.85);
+    transform: translateY(-1px);
+}
+
+/* ---- RESPONSIVIDADE ---- */
+@media (max-width: 540px) {
+    .form-container {
+        padding: 2rem 1.5rem;
+    }
+
+    .form-acoes {
+        flex-direction: column-reverse;
+    }
+
+    .btn-cancelar,
+    .btn-guardar {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+}
