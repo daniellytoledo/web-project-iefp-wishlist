@@ -1,0 +1,161 @@
+/* =============================================
+   ARQUIVO: css/index.css
+   FUNÇÃO: Estilos da página principal (index)
+   ============================================= */
+
+/* ---- RESET & BASE ---- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --cor-fundo: #1f3760;
+    --cor-branco: #ffffff;
+    --cor-branco-suave: rgba(255, 255, 255, 0.85);
+    --cor-branco-hover: rgba(255, 255, 255, 0.12);
+    --cor-borda-btn: rgba(255, 255, 255, 0.3);
+    --fonte-principal: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--cor-fundo);
+    font-family: var(--fonte-principal);
+    color: var(--cor-branco);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ---- NAVBAR ---- */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.4rem 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-logo {
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: lowercase;
+    color: var(--cor-branco-suave);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--cor-branco-suave);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: var(--cor-branco);
+}
+
+/* ---- CONTEÚDO PRINCIPAL ---- */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    gap: 3rem;
+}
+
+.page-title {
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+}
+
+/* ---- GRID DE CATEGORIAS ---- */
+.categorias-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 220px);
+    gap: 1.2rem;
+}
+
+/* ---- BOTÃO DE CATEGORIA ---- */
+.categoria-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 220px;
+    height: 80px;
+    background-color: var(--cor-branco);
+    color: var(--cor-fundo);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.categoria-btn:hover {
+    background-color: var(--cor-branco-hover);
+    color: var(--cor-branco);
+    border-color: var(--cor-borda-btn);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* Mensagem quando não há categorias */
+.sem-categorias {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+/* ---- FOOTER ---- */
+.footer {
+    padding: 1.5rem 3rem;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.75rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.3);
+    text-transform: lowercase;
+}
+
+/* ---- RESPONSIVIDADE ---- */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 1.2rem 1.5rem;
+    }
+
+    .categorias-grid {
+        grid-template-columns: repeat(2, 180px);
+    }
+
+    .categoria-btn {
+        width: 180px;
+        height: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .categorias-grid {
+        grid-template-columns: repeat(1, 220px);
+    }
+}
