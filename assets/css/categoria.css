@@ -94,6 +94,14 @@
     z-index: 1;
 }
 
+.imagem-placeholder {
+    display: none;  /* ← muda de flex/block para none */
+    font-size: 0.7rem;
+    color: #aab4c4;
+    letter-spacing: 0.08em;
+    text-transform: lowercase;
+}
+
 /* ---- INFORMAÇÕES DO DESEJO ---- */
 .desejo-info {
     padding: 1rem;

@@ -37,6 +37,7 @@ define('DESC_LIMITE', 80);
 
 <!DOCTYPE html>
 <html lang="pt-PT">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,15 +45,11 @@ define('DESC_LIMITE', 80);
     <link rel="stylesheet" href="../assets/css/index.css">
     <link rel="stylesheet" href="../assets/css/categoria.css">
 </head>
+
 <body>
 
-    <!-- ========== NAVEGAÇÃO ========== -->
-    <nav class="navbar">
-        <a href="../index.php" class="nav-logo">wishlist</a>
-        <ul class="nav-links">
-            <li><a href="nova-categoria.php">+ Nova Categoria</a></li>
-        </ul>
-    </nav>
+    <!-- ========== require puxando o arquivo nav ========== -->
+    <?php require_once '../includes/nav.php' ?>
 
     <!-- ========== CABEÇALHO DA CATEGORIA ========== -->
     <header class="categoria-header">
@@ -72,18 +69,21 @@ define('DESC_LIMITE', 80);
                 <?php foreach ($desejos as $desejo): ?>
 
                     <?php
-                        $descricao_completa = $desejo['desc_d'] ?? '';
-                        $descricao_curta    = mb_substr($descricao_completa, 0, DESC_LIMITE);
-                        $tem_mais           = mb_strlen($descricao_completa) > DESC_LIMITE;
+                    $descricao_completa = $desejo['desc_d'] ?? '';
+                    $descricao_curta    = mb_substr($descricao_completa, 0, DESC_LIMITE);
+                    $tem_mais           = mb_strlen($descricao_completa) > DESC_LIMITE;
                     ?>
 
                     <div class="desejo-card">
 
                         <!-- Área reservada para imagem -->
+                        <!-- onload: quando a imagem carrega com sucesso, garante que o span placeholder fica escondido -->
+                        <!-- onerror: quando a imagem não existe ou falha, esconde a img e mostra o span no lugar -->
                         <div class="desejo-imagem">
-                            <img src="../assets/images/<?= $desejo['id_d'] ?>.jpg"
-                                 alt="<?= htmlspecialchars($desejo['nome_d']) ?>"
-                                 onerror="this.style.display='none'">
+                            <img src="../img_artigos/<?= $desejo['id_d'] ?>.jpg"
+                                alt="<?= htmlspecialchars($desejo['nome_d']) ?>"                  
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" 
+                                onload="this.nextElementSibling.style.display='none';">
                             <span class="imagem-placeholder">imagem em breve</span>
                         </div>
 
@@ -101,8 +101,7 @@ define('DESC_LIMITE', 80);
                                     <?= htmlspecialchars($descricao_curta) ?>...
                                     <button
                                         class="btn-ver-mais"
-                                        onclick="abrirModal(<?= $desejo['id_d'] ?>)"
-                                    >ver +</button>
+                                        onclick="abrirModal(<?= $desejo['id_d'] ?>)">ver +</button>
                                 <?php else: ?>
                                     <?= htmlspecialchars($descricao_completa) ?>
                                 <?php endif; ?>
@@ -135,4 +134,5 @@ define('DESC_LIMITE', 80);
     <script src="../assets/js/categoria.js"></script>
 
 </body>
+
 </html>

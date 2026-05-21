@@ -6,7 +6,11 @@ require_once 'config/database.php';
  
 // Busca todas as categorias do banco de dados
 $sql = "SELECT * FROM categorias ORDER BY nome_c ASC";
+// $pdo é a conexão com a base de dados e ->query executa o comando $sql que neste caso é o select * from acima
 $stmt = $pdo->query($sql);
+// agora criamos um array chamado $categorias com os dados do comando acima.
+// o $stmt é um objeto que representa a conexão com os resultados
+// o fetchAll pega o resultado do objeto e passa para o array
 $categorias = $stmt->fetchAll();
 ?>
  
@@ -39,7 +43,7 @@ $categorias = $stmt->fetchAll();
                 <p class="sem-categorias">Nenhuma categoria encontrada. Adiciona a primeira!</p>
             <?php else: ?>
                 <?php foreach ($categorias as $categoria): ?>
-                    <a href="categoria.php?id=<?= $categoria['id_c'] ?>" class="categoria-btn">
+                    <a href="pages/categoria.php?id=<?= $categoria['id_c'] ?>" class="categoria-btn">
                         <?= htmlspecialchars($categoria['nome_c']) ?>
                     </a>
                 <?php endforeach; ?>
