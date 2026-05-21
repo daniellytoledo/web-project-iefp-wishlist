@@ -38,6 +38,8 @@ $categorias = $stmt->fetchAll();
         <h1 class="page-title">O que desejas?</h1>
  
         <!-- Grade de botões de categorias -->
+        <!-- o if em php serve para verificar se existe categoria, se não existir, mostra a mensagem -->
+        <!-- o foreach serve para que cada conteúdo de $categoria, carregue a página com de acordo com o id de cada categoria -->
         <div class="categorias-grid">
             <?php if (empty($categorias)): ?>
                 <p class="sem-categorias">Nenhuma categoria encontrada. Adiciona a primeira!</p>
@@ -52,7 +54,7 @@ $categorias = $stmt->fetchAll();
  
     </main>
  
-
+<!-- require_once para puxar o arquivo do footer, sem precisar ficar repetindo o código em todas as páginas -->
 <?php require_once 'includes/footer.php' ?>
  
 </body>
