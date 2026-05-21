@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div class="form-acoes">
-                    <a href="index.php" class="btn-cancelar">Cancelar</a>
+                    <a href="../index.php" class="btn-cancelar">Cancelar</a>
                     <button type="submit" class="btn-guardar">Guardar Categoria</button>
                 </div>
 

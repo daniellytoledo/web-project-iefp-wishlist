@@ -1,0 +1,238 @@
+/* =============================================
+   ARQUIVO: assets/css/categoria.css
+   FUNÇÃO: Estilos da página de categoria
+   ============================================= */
+
+/* ---- CABEÇALHO DA CATEGORIA ---- */
+.categoria-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem 3rem 0;
+}
+
+.btn-voltar {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-voltar:hover {
+    color: var(--cor-branco);
+}
+
+.categoria-titulo {
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: var(--cor-branco);
+    text-transform: uppercase;
+}
+
+.categoria-contagem {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.3);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    margin-left: auto;
+}
+
+/* ---- GRID DE DESEJOS ---- */
+.desejos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 220px);
+    gap: 1.2rem;
+}
+
+/* ---- CARD DO DESEJO ---- */
+.desejo-card {
+    width: 220px;
+    height: 500px;
+    background-color: var(--cor-branco);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.desejo-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* ---- ÁREA DA IMAGEM ---- */
+.desejo-imagem {
+    width: 100%;
+    height: 300px;
+    background-color: #e8edf5;
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.desejo-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.imagem-placeholder {
+    font-size: 0.7rem;
+    color: #aab4c4;
+    letter-spacing: 0.08em;
+    text-transform: lowercase;
+    z-index: 1;
+}
+
+/* ---- INFORMAÇÕES DO DESEJO ---- */
+.desejo-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1;
+    overflow: hidden;
+}
+
+.desejo-nome {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--cor-fundo);
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+}
+
+.desejo-preco {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--cor-fundo);
+    opacity: 0.6;
+}
+
+.desejo-descricao {
+    font-size: 0.78rem;
+    color: #4a5a74;
+    line-height: 1.5;
+    margin-top: 0.2rem;
+}
+
+/* ---- BOTÃO VER MAIS ---- */
+.btn-ver-mais {
+    background: none;
+    border: none;
+    color: var(--cor-fundo);
+    font-size: 0.78rem;
+    font-weight: 600;
+    font-family: var(--fonte-principal);
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.btn-ver-mais:hover {
+    opacity: 1;
+}
+
+/* ---- MENSAGEM SEM DESEJOS ---- */
+.sem-desejos {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.9rem;
+    font-weight: 300;
+    text-align: center;
+}
+
+/* ---- MODAL ---- */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(15, 25, 50, 0.75);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+}
+
+.modal-overlay.ativo {
+    display: flex;
+}
+
+.modal-caixa {
+    background-color: #1a2e52;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 2rem 2.5rem;
+    max-width: 480px;
+    width: 90%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    animation: modal-entrar 0.2s ease;
+}
+
+@keyframes modal-entrar {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.modal-fechar {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    font-family: var(--fonte-principal);
+}
+
+.modal-fechar:hover {
+    color: var(--cor-branco);
+}
+
+.modal-titulo {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--cor-branco);
+    padding-right: 1.5rem;
+}
+
+.modal-descricao {
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.7;
+}
+
+/* ---- RESPONSIVIDADE ---- */
+@media (max-width: 768px) {
+    .categoria-header {
+        padding: 1.5rem 1.5rem 0;
+        flex-wrap: wrap;
+    }
+
+    .desejos-grid {
+        grid-template-columns: repeat(2, 220px);
+    }
+}
+
+@media (max-width: 520px) {
+    .desejos-grid {
+        grid-template-columns: 220px;
+    }
+}

@@ -1,0 +1,138 @@
+<?php
+// ARQUIVO: pages/categoria.php
+// FUNÇÃO: Exibe os desejos de uma categoria específica de forma dinâmica
+
+require_once '../config/database.php';
+
+// Verifica se o id da categoria foi passado na URL
+// Exemplo: categoria.php?id=2
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+    header('Location: ../index.php');
+    exit;
+}
+
+$id_categoria = (int) $_GET['id'];
+
+// Busca o nome da categoria pelo id
+$sql_categoria = "SELECT * FROM categorias WHERE id_c = :id";
+$stmt = $pdo->prepare($sql_categoria);
+$stmt->execute([':id' => $id_categoria]);
+$categoria = $stmt->fetch();
+
+// Se a categoria não existir, redireciona para o index
+if (!$categoria) {
+    header('Location: ../index.php');
+    exit;
+}
+
+// Busca todos os desejos que pertencem a esta categoria
+$sql_desejos = "SELECT * FROM desejos WHERE categoria_d = :id ORDER BY nome_d ASC";
+$stmt = $pdo->prepare($sql_desejos);
+$stmt->execute([':id' => $id_categoria]);
+$desejos = $stmt->fetchAll();
+
+// Limite de caracteres antes de mostrar o botão "ver +"
+define('DESC_LIMITE', 80);
+?>
+
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= htmlspecialchars($categoria['nome_c']) ?> — Wishlist</title>
+    <link rel="stylesheet" href="../assets/css/index.css">
+    <link rel="stylesheet" href="../assets/css/categoria.css">
+</head>
+<body>
+
+    <!-- ========== NAVEGAÇÃO ========== -->
+    <nav class="navbar">
+        <a href="../index.php" class="nav-logo">wishlist</a>
+        <ul class="nav-links">
+            <li><a href="nova-categoria.php">+ Nova Categoria</a></li>
+        </ul>
+    </nav>
+
+    <!-- ========== CABEÇALHO DA CATEGORIA ========== -->
+    <header class="categoria-header">
+        <a href="../index.php" class="btn-voltar">← voltar</a>
+        <h1 class="categoria-titulo"><?= htmlspecialchars($categoria['nome_c']) ?></h1>
+        <span class="categoria-contagem"><?= count($desejos) ?> desejo<?= count($desejos) !== 1 ? 's' : '' ?></span>
+    </header>
+
+    <!-- ========== CONTEÚDO PRINCIPAL ========== -->
+    <main class="main-content">
+
+        <?php if (empty($desejos)): ?>
+            <p class="sem-desejos">Nenhum desejo nesta categoria ainda.</p>
+        <?php else: ?>
+
+            <div class="desejos-grid">
+                <?php foreach ($desejos as $desejo): ?>
+
+                    <?php
+                        $descricao_completa = $desejo['desc_d'] ?? '';
+                        $descricao_curta    = mb_substr($descricao_completa, 0, DESC_LIMITE);
+                        $tem_mais           = mb_strlen($descricao_completa) > DESC_LIMITE;
+                    ?>
+
+                    <div class="desejo-card">
+
+                        <!-- Área reservada para imagem -->
+                        <div class="desejo-imagem">
+                            <img src="../assets/images/<?= $desejo['id_d'] ?>.jpg"
+                                 alt="<?= htmlspecialchars($desejo['nome_d']) ?>"
+                                 onerror="this.style.display='none'">
+                            <span class="imagem-placeholder">imagem em breve</span>
+                        </div>
+
+                        <!-- Informações do desejo -->
+                        <div class="desejo-info">
+
+                            <h2 class="desejo-nome"><?= htmlspecialchars($desejo['nome_d']) ?></h2>
+
+                            <?php if ($desejo['preco_d']): ?>
+                                <span class="desejo-preco">€ <?= number_format($desejo['preco_d'], 2, ',', '.') ?></span>
+                            <?php endif; ?>
+
+                            <p class="desejo-descricao">
+                                <?php if ($tem_mais): ?>
+                                    <?= htmlspecialchars($descricao_curta) ?>...
+                                    <button
+                                        class="btn-ver-mais"
+                                        onclick="abrirModal(<?= $desejo['id_d'] ?>)"
+                                    >ver +</button>
+                                <?php else: ?>
+                                    <?= htmlspecialchars($descricao_completa) ?>
+                                <?php endif; ?>
+                            </p>
+
+                        </div>
+                    </div>
+
+                    <?php if ($tem_mais): ?>
+                        <!-- Modal com descrição completa -->
+                        <div class="modal-overlay" id="modal-<?= $desejo['id_d'] ?>" onclick="fecharModal(<?= $desejo['id_d'] ?>)">
+                            <div class="modal-caixa" onclick="event.stopPropagation()">
+                                <button class="modal-fechar" onclick="fecharModal(<?= $desejo['id_d'] ?>)">✕</button>
+                                <h3 class="modal-titulo"><?= htmlspecialchars($desejo['nome_d']) ?></h3>
+                                <p class="modal-descricao"><?= htmlspecialchars($descricao_completa) ?></p>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+                <?php endforeach; ?>
+            </div>
+
+        <?php endif; ?>
+
+    </main>
+
+    <!-- ========== require puxando o arquivo footer ========== -->
+    <?php require_once '../includes/footer.php' ?>
+
+    <script src="../assets/js/categoria.js"></script>
+
+</body>
+</html>
