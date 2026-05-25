@@ -52,7 +52,6 @@ $categorias    = $smtm->fetchAll();
         <a href="../index.php" class="nav-logo">wishlist</a>
         <ul class="nav-links">
             <li><a href="nova-categoria.php">+ Nova Categoria</a></li>
-            <li><a href="editar-categoria.php" class="nav-link-ativo">✎ Editar Categoria</a></li>
             <li><a href="excluir-categoria.php">− Excluir Categoria</a></li>
         </ul>
     </nav>

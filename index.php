@@ -30,6 +30,7 @@ $categorias = $stmt->fetchAll();
         <ul class="nav-links">
             <li><a href="pages/nova-categoria.php">+ Nova Categoria</a></li>
             <li><a href="pages/excluir-categoria.php">- Excluir Categoria</a></li>
+            <li><a href="pages/editar-categoria.php">✎ Editar Categoria</a></li>
         </ul>
     </nav>
  
