@@ -130,26 +130,20 @@ O projeto usa duas tabelas:
 
 ## Imagens:
 
+index.php
 ![Index](./wishlist-prints/index.jpg)
 
 -
-
+nova-categoria.php
 ![Nova Categoria](./wishlist-prints/nova-categoria.jpg)
 
 -
-
+excluir-categoria.php
 ![Excluir Categoria](./wishlist-prints/excluir-categoria.jpg)
 
 -
-
+categoria.php
 ![Produtos dentro da categoria](./wishlist-prints/produtos.jpg)
-
----
-
-
-## 📄 Documentação
-
-O ficheiro [`conexao-base-de-dados.pdf`](./conexao-base-de-dados.pdf) explica passo a passo como foi feita a ligação ao MySQL, cobrindo os conceitos de `.env`, `parse_ini_file()`, PDO, prepared statements e segurança contra SQL Injection.
 
 ---
 
