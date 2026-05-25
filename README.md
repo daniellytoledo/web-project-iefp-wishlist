@@ -18,8 +18,8 @@ A aplicação permite visualizar, adicionar e remover categorias de desejos, e c
 - ✅ Excluir categoria com confirmação
 - ✅ Modal de descrição completa para textos longos
 - ✅ Área reservada para imagens por artigo
-- 🔲 Adicionar novo desejo *(em desenvolvimento)*
-- 🔲 Excluir desejo *(em desenvolvimento)*
+- ✅ Adicionar nova categoria 
+- ✅ Excluir categoria
 
 ---
 
