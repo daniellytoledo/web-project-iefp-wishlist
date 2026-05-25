@@ -130,19 +130,19 @@ O projeto usa duas tabelas:
 
 ## Imagens:
 
-![Index](wishlist-prints/index.jpg)
+![Index](./wishlist-prints/index.jpg)
 
 -
 
-![Nova Categoria](wishlist-prints/nova-categoria.jpg)
+![Nova Categoria](./wishlist-prints/nova-categoria.jpg)
 
 -
 
-![Excluir Categoria](wishlist-prints/excluir-categoria.jpg)
+![Excluir Categoria](./wishlist-prints/excluir-categoria.jpg)
 
 -
 
-![Produtos dentro da categoria](wishlist-prints/produtos.jpg)
+![Produtos dentro da categoria](./wishlist-prints/produtos.jpg)
 
 ---
 
