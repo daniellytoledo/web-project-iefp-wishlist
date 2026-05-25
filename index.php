@@ -29,6 +29,7 @@ $categorias = $stmt->fetchAll();
         <div class="nav-logo">wishlist</div>
         <ul class="nav-links">
             <li><a href="pages/nova-categoria.php">+ Nova Categoria</a></li>
+            <li><a href="pages/excluir-categoria.php">- Excluir Categoria</a></li>
         </ul>
     </nav>
  

@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?= $mensagem ?>
                     <?php if ($tipo_mensagem === 'sucesso'): ?>
                         <span class="mensagem-links">
-                            <a href="index.php">← Voltar ao início</a> ou
+                            <a href="../index.php">← Voltar ao início</a> ou
                             <a href="nova-categoria.php">adicionar outra</a>
                         </span>
                     <?php endif; ?>

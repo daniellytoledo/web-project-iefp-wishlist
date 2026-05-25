@@ -54,7 +54,6 @@ $categorias = $stmt->fetchAll();
         <a href="../index.php" class="nav-logo">wishlist</a>
         <ul class="nav-links">
             <li><a href="nova-categoria.php">+ Nova Categoria</a></li>
-            <li><a href="excluir-categoria.php" class="nav-link-ativo">− Excluir Categoria</a></li>
         </ul>
     </nav>
 
@@ -148,7 +147,7 @@ $categorias = $stmt->fetchAll();
     <!-- ========== require puxando o arquivo footer ========== -->
     <?php require_once '../includes/footer.php' ?>
 
-    <script src="../assets/js/excluir-categoria.js"></script>
+    <script src="../assets/js/excluir.js"></script>
 
 </body>
 </html>
