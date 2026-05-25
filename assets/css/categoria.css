@@ -1,9 +1,5 @@
-/* =============================================
-   ARQUIVO: assets/css/categoria.css
-   FUNÇÃO: Estilos da página de categoria
-   ============================================= */
-
 /* ---- CABEÇALHO DA CATEGORIA ---- */
+
 .categoria-header {
     display: flex;
     align-items: center;
