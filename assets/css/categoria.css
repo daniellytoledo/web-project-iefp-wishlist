@@ -130,6 +130,39 @@
     margin-top: 0.2rem;
 }
 
+/* ---- BOTÃO NOVO DESEJO E EDITAR DESEJO ---- */
+.btn-novo-desejo {
+    margin-left: auto;
+    padding: 0.5rem 1.1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background-color: var(--cor-branco);
+    color: var(--cor-fundo);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-novo-desejo:hover {
+    background-color: rgba(255, 255, 255, 0.85);
+    transform: translateY(-1px);
+}
+
+.btn-editar-desejo {
+    display: inline-block;
+    margin-top: auto;
+    padding-top: 0.6rem;
+    font-size: 0.72rem;
+    color: #4a5a74;
+    text-decoration: none;
+    border-top: 1px solid rgba(31, 55, 96, 0.1);
+    transition: color 0.2s ease;
+}
+
+.btn-editar-desejo:hover {
+    color: var(--cor-fundo);
+}
+
 /* ---- BOTÃO VER MAIS ---- */
 .btn-ver-mais {
     background: none;

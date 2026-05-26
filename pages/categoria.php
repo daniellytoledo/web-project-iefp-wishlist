@@ -55,7 +55,9 @@ define('DESC_LIMITE', 80);
     <header class="categoria-header">
         <a href="../index.php" class="btn-voltar">← voltar</a>
         <h1 class="categoria-titulo"><?= htmlspecialchars($categoria['nome_c']) ?></h1>
+        <a href="novo-desejo.php?categoria=<?= $id_categoria ?>" class="btn-novo-desejo">+ Novo Desejo</a>
         <span class="categoria-contagem"><?= count($desejos) ?> desejo<?= count($desejos) !== 1 ? 's' : '' ?></span>
+
     </header>
 
     <!-- ========== CONTEÚDO PRINCIPAL ========== -->
@@ -91,6 +93,7 @@ define('DESC_LIMITE', 80);
                         <div class="desejo-info">
 
                             <h2 class="desejo-nome"><?= htmlspecialchars($desejo['nome_d']) ?></h2>
+                            <a href="editar-desejo.php?id=<?= $desejo['id_d'] ?>" class="btn-editar-desejo">✎ editar</a>
 
                             <?php if ($desejo['preco_d']): ?>
                                 <span class="desejo-preco">€ <?= number_format($desejo['preco_d'], 2, ',', '.') ?></span>

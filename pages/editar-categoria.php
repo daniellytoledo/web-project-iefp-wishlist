@@ -128,7 +128,7 @@ $categorias    = $smtm->fetchAll();
  
                 <!-- Botões de ação -->
                 <div class="form-acoes">
-                    <a href="../index.php" class="btn-cancelar">Cancelar</a>
+                    <a href="editar-categoria.php" class="btn-cancelar">Cancelar</a>
                     <?php if (!empty($categorias)): ?>
                         <button type="submit" class="btn-guardar">Guardar Alteração</button>
                     <?php endif; ?>
