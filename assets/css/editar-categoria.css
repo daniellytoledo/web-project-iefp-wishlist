@@ -6,6 +6,23 @@
     opacity: 0.9;
 }
 
+/* ---- LINK DE VOLTAR À CATEGORIA ---- */
+.btn-voltar-form,
+.btn-voltar-form:link,
+.btn-voltar-form:visited {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.35);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    margin-bottom: -0.6rem;
+    transition: color 0.2s ease;
+    align-self: flex-start;
+}
+
+.btn-voltar-form:hover {
+    color: rgba(255, 255, 255, 0.7);
+}
+
 /* ---- CONTAINER DO FORMULÁRIO ---- */
 .form-container {
     background-color: rgba(255, 255, 255, 0.05);

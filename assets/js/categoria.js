@@ -32,6 +32,32 @@ document.addEventListener('keydown', function (e) {
         modaisAtivos.forEach(function (modal) {
             modal.classList.remove('ativo');
         });
+        fecharModalApagar();
         document.body.style.overflow = '';
     }
 });
+
+// ── APAGAR DESEJO ──────────────────────────────────────
+
+function abrirModalApagar(id, nome) {
+    document.getElementById('input-id-desejo').value = id;
+    document.getElementById('modal-nome-desejo').textContent = nome;
+    document.getElementById('modal-apagar').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function fecharModalApagar() {
+    const modal = document.getElementById('modal-apagar');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+}
+
+/**
+ * Submete o formulário escondido para apagar o desejo
+ */
+function confirmarApagar() {
+    fecharModalApagar();
+    document.getElementById('form-apagar').submit();
+}

@@ -1,4 +1,4 @@
     <!-- ========== RODAPÉ ========== -->
     <footer class="footer">
-        <p>projeto iefp &mdash; danielly toledo</p>
+        <p>projeto iefp / exponha seus desejos  &mdash; danielly toledo</p>
     </footer>

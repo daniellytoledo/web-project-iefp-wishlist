@@ -5,10 +5,21 @@ require_once '../config/database.php';
 $mensagem = '';
 $tipo_mensagem = '';
 
+// id da categoria que veio pelo URL (?id=X) ou pelo campo oculto do formulário
+$pre_id = null;
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $pre_id = (int) $_GET['id'];
+}
+
 // verifica se o formulário de edição foi submetido
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_categoria = (int) $_POST['id_categoria'];
     $novo_nome    = trim($_POST['novo_nome']);
+
+    // preserva o pre_id através do POST para redirecionar de volta
+    if (isset($_POST['pre_id']) && is_numeric($_POST['pre_id'])) {
+        $pre_id = (int) $_POST['pre_id'];
+    }
 
     // valida se o campo do novo nome não está vazio
     if(empty($novo_nome)) {
@@ -16,13 +27,18 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $tipo_mensagem = 'erro';
     } else {
         // atualiza o nome da categoria no banco de dados
-        // usa prepared statement para evitar SQL Injection
         $sql   = "UPDATE categorias SET nome_c = :nome WHERE id_c = :id";
         $smtm  = $pdo->prepare($sql);
         $smtm->execute([
             ':nome' => $novo_nome,
             ':id'   => $id_categoria,
         ]);
+
+        // se veio da página da categoria, redireciona de volta para lá
+        if ($pre_id) {
+            header('Location: categoria.php?id=' . $id_categoria);
+            exit;
+        }
 
         $mensagem      = 'Categoria atualizada para "' . htmlspecialchars($novo_nome) . '" com sucesso!';
         $tipo_mensagem = 'sucesso';
@@ -33,6 +49,17 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 $sql_categoria = "SELECT * FROM categorias ORDER BY nome_c ASC";
 $smtm          = $pdo->query($sql_categoria);
 $categorias    = $smtm->fetchAll();
+
+// nome atual da categoria pré-selecionada (para pré-preencher o campo)
+$pre_nome = '';
+if ($pre_id) {
+    foreach ($categorias as $cat) {
+        if ($cat['id_c'] === $pre_id) {
+            $pre_nome = $cat['nome_c'];
+            break;
+        }
+    }
+}
 
 ?>
 
@@ -61,6 +88,9 @@ $categorias    = $smtm->fetchAll();
  
         <div class="form-container">
  
+            <?php if ($pre_id): ?>
+                <a href="categoria.php?id=<?= $pre_id ?>" class="btn-voltar-form">← voltar à categoria</a>
+            <?php endif; ?>
             <h1 class="form-titulo">Editar Categoria</h1>
             <p class="form-subtitulo">Seleciona a categoria e escreve o novo nome.</p>
  
@@ -79,6 +109,11 @@ $categorias    = $smtm->fetchAll();
  
             <!-- Formulário de edição -->
             <form method="POST" action="editar-categoria.php" class="form-categoria" id="form-editar">
+
+                <!-- preserva o pre_id para o PHP redirecionar de volta após guardar -->
+                <?php if ($pre_id): ?>
+                    <input type="hidden" name="pre_id" value="<?= $pre_id ?>">
+                <?php endif; ?>
  
                 <!-- Campo para escolher qual categoria editar -->
                 <div class="campo-grupo">
@@ -98,7 +133,7 @@ $categorias    = $smtm->fetchAll();
                             <option value="" disabled selected>Escolhe uma categoria...</option>
                             <?php foreach ($categorias as $cat): ?>
                                 <option value="<?= $cat['id_c'] ?>"
-                                    <?= (isset($_POST['id_categoria']) && $_POST['id_categoria'] == $cat['id_c']) ? 'selected' : '' ?>>
+                                    <?= ($cat['id_c'] === $pre_id || (isset($_POST['id_categoria']) && $_POST['id_categoria'] == $cat['id_c'])) ? 'selected' : '' ?>>
                                     <?= htmlspecialchars($cat['nome_c']) ?>
                                 </option>
                             <?php endforeach; ?>
@@ -107,11 +142,10 @@ $categorias    = $smtm->fetchAll();
                 </div>
  
                 <!-- Campo para escrever o novo nome — aparece após escolher a categoria -->
-                <div class="campo-grupo campo-novo-nome" id="grupo-novo-nome">
+                <div class="campo-grupo campo-novo-nome <?= ($pre_nome || $tipo_mensagem === 'erro') ? 'visivel' : '' ?>" id="grupo-novo-nome">
                     <label for="novo_nome" class="campo-label">
                         Novo Nome
-                        <!-- Mostra o nome atual como referência -->
-                        <span class="nome-atual" id="nome-atual"></span>
+                        <span class="nome-atual" id="nome-atual"><?= $pre_nome ? '(atual: ' . htmlspecialchars($pre_nome) . ')' : '' ?></span>
                     </label>
                     <input
                         type="text"
@@ -121,7 +155,7 @@ $categorias    = $smtm->fetchAll();
                         placeholder="Escreve o novo nome..."
                         maxlength="50"
                         autocomplete="off"
-                        value="<?= (isset($_POST['novo_nome']) && $tipo_mensagem === 'erro') ? htmlspecialchars($_POST['novo_nome']) : '' ?>"
+                        value="<?= (isset($_POST['novo_nome']) && $tipo_mensagem === 'erro') ? htmlspecialchars($_POST['novo_nome']) : htmlspecialchars($pre_nome) ?>"
                     >
                     <span class="campo-contador">máx. 50 caracteres</span>
                 </div>

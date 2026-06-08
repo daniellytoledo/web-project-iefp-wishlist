@@ -1,5 +1,5 @@
-/* ---- CABEÇALHO DA CATEGORIA ---- */
 
+/* ---- CABEÇALHO DA CATEGORIA ---- */
 .categoria-header {
     display: flex;
     align-items: center;
@@ -34,6 +34,37 @@
     font-weight: 300;
     letter-spacing: 0.08em;
     margin-left: auto;
+}
+
+/* Botão de adicionar novo desejo no cabeçalho */
+.btn-novo-desejo {
+    padding: 0.5rem 1.1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background-color: var(--cor-branco);
+    color: var(--cor-fundo);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-novo-desejo:hover {
+    background-color: rgba(255, 255, 255, 0.85);
+    transform: translateY(-1px);
+}
+
+/* Botão de editar o nome da categoria no cabeçalho */
+.btn-editar-categoria {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+}
+
+.btn-editar-categoria:hover {
+    color: var(--cor-branco);
 }
 
 /* ---- GRID DE DESEJOS ---- */
@@ -82,20 +113,14 @@
     left: 0;
 }
 
+/* Começa escondido — só aparece via onerror quando a imagem falha */
 .imagem-placeholder {
+    display: none;
     font-size: 0.7rem;
     color: #aab4c4;
     letter-spacing: 0.08em;
     text-transform: lowercase;
     z-index: 1;
-}
-
-.imagem-placeholder {
-    display: none;  /* ← muda de flex/block para none */
-    font-size: 0.7rem;
-    color: #aab4c4;
-    letter-spacing: 0.08em;
-    text-transform: lowercase;
 }
 
 /* ---- INFORMAÇÕES DO DESEJO ---- */
@@ -130,39 +155,6 @@
     margin-top: 0.2rem;
 }
 
-/* ---- BOTÃO NOVO DESEJO E EDITAR DESEJO ---- */
-.btn-novo-desejo {
-    margin-left: auto;
-    padding: 0.5rem 1.1rem;
-    font-size: 0.8rem;
-    font-weight: 600;
-    background-color: var(--cor-branco);
-    color: var(--cor-fundo);
-    text-decoration: none;
-    border-radius: 6px;
-    transition: background-color 0.2s ease, transform 0.15s ease;
-}
-
-.btn-novo-desejo:hover {
-    background-color: rgba(255, 255, 255, 0.85);
-    transform: translateY(-1px);
-}
-
-.btn-editar-desejo {
-    display: inline-block;
-    margin-top: auto;
-    padding-top: 0.6rem;
-    font-size: 0.72rem;
-    color: #4a5a74;
-    text-decoration: none;
-    border-top: 1px solid rgba(31, 55, 96, 0.1);
-    transition: color 0.2s ease;
-}
-
-.btn-editar-desejo:hover {
-    color: var(--cor-fundo);
-}
-
 /* ---- BOTÃO VER MAIS ---- */
 .btn-ver-mais {
     background: none;
@@ -183,6 +175,33 @@
     opacity: 1;
 }
 
+/* ---- BOTÕES EDITAR E APAGAR — linha partilhada no fundo do card ---- */
+
+/* Wrapper que agrupa os dois botões lado a lado no fundo do card */
+.desejo-acoes {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 0.6rem;
+    border-top: 1px solid rgba(31, 55, 96, 0.1);
+}
+
+.btn-editar-desejo {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: #4a5a74;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.btn-editar-desejo:hover {
+    color: var(--cor-fundo);
+}
+
 /* ---- MENSAGEM SEM DESEJOS ---- */
 .sem-desejos {
     color: rgba(255, 255, 255, 0.4);
@@ -191,7 +210,7 @@
     text-align: center;
 }
 
-/* ---- MODAL ---- */
+/* ---- MODAL DE DESCRIÇÃO COMPLETA (ver +) ---- */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -254,6 +273,106 @@
     font-size: 0.88rem;
     color: rgba(255, 255, 255, 0.65);
     line-height: 1.7;
+}
+
+/* ---- MODAL DE CONFIRMAÇÃO DE APAGAR ---- */
+/* Usa classes próprias para não colidir com o modal de descrição acima */
+.modal-apagar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(10, 20, 45, 0.8);
+    z-index: 110;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+}
+
+.modal-apagar-caixa {
+    background-color: #1a2e52;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 2.5rem;
+    max-width: 400px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    animation: modal-entrar 0.2s ease;
+}
+
+.modal-icone {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: rgba(220, 80, 80, 0.15);
+    border: 1px solid rgba(220, 80, 80, 0.4);
+    color: #e08080;
+    font-size: 1.4rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-apagar-titulo {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--cor-branco);
+}
+
+.modal-texto {
+    font-size: 0.83rem;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.6;
+}
+
+.modal-texto strong {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.modal-acoes {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.btn-cancelar {
+    padding: 0.7rem 1.4rem;
+    font-size: 0.85rem;
+    font-family: var(--fonte-principal);
+    color: rgba(255, 255, 255, 0.45);
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+.btn-cancelar:hover {
+    color: var(--cor-branco);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+.btn-apagar-confirmar {
+    padding: 0.7rem 1.6rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: var(--fonte-principal);
+    background-color: #dc5050;
+    color: var(--cor-branco);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-apagar-confirmar:hover {
+    background-color: #c44040;
 }
 
 /* ---- RESPONSIVIDADE ---- */

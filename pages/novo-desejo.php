@@ -37,7 +37,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $categoria_d = trim($_POST['categoria_d']);
 
 // valida se o nome do desejo foi preenchido (único campo obrigatório)
-if(empty($_nome)) {
+if(empty($nome_d)) {
     $mensagem      = 'O nome do desejo é obrigatório.';
     $tipo_mensagem = 'erro';
     } else {

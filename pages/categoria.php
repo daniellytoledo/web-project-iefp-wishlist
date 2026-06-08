@@ -55,6 +55,7 @@ define('DESC_LIMITE', 80);
     <header class="categoria-header">
         <a href="../index.php" class="btn-voltar">← voltar</a>
         <h1 class="categoria-titulo"><?= htmlspecialchars($categoria['nome_c']) ?></h1>
+        <a href="editar-categoria.php?id=<?= $id_categoria ?>" class="btn-editar-categoria">✎ editar</a>
         <a href="novo-desejo.php?categoria=<?= $id_categoria ?>" class="btn-novo-desejo">+ Novo Desejo</a>
         <span class="categoria-contagem"><?= count($desejos) ?> desejo<?= count($desejos) !== 1 ? 's' : '' ?></span>
 
@@ -83,8 +84,8 @@ define('DESC_LIMITE', 80);
                         <!-- onerror: quando a imagem não existe ou falha, esconde a img e mostra o span no lugar -->
                         <div class="desejo-imagem">
                             <img src="../img_artigos/<?= $desejo['id_d'] ?>.jpg"
-                                alt="<?= htmlspecialchars($desejo['nome_d']) ?>"                  
-                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" 
+                                alt="<?= htmlspecialchars($desejo['nome_d']) ?>"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
                                 onload="this.nextElementSibling.style.display='none';">
                             <span class="imagem-placeholder">imagem em breve</span>
                         </div>
@@ -93,7 +94,10 @@ define('DESC_LIMITE', 80);
                         <div class="desejo-info">
 
                             <h2 class="desejo-nome"><?= htmlspecialchars($desejo['nome_d']) ?></h2>
-                            <a href="editar-desejo.php?id=<?= $desejo['id_d'] ?>" class="btn-editar-desejo">✎ editar</a>
+                            <div class="desejo-acoes">
+                                <a href="editar-desejo.php?id=<?= $desejo['id_d'] ?>" class="btn-editar-desejo">✎ editar</a>
+                                <a href="#" class="btn-editar-desejo" onclick="abrirModalApagar(<?= $desejo['id_d'] ?>, '<?= htmlspecialchars($desejo['nome_d'], ENT_QUOTES) ?>'); return false;">✕ apagar</a>
+                            </div>
 
                             <?php if ($desejo['preco_d']): ?>
                                 <span class="desejo-preco">€ <?= number_format($desejo['preco_d'], 2, ',', '.') ?></span>
@@ -134,7 +138,28 @@ define('DESC_LIMITE', 80);
     <!-- ========== require puxando o arquivo footer ========== -->
     <?php require_once '../includes/footer.php' ?>
 
+    <!-- Formulário oculto submetido pelo JS ao confirmar apagar -->
+    <form id="form-apagar" action="apagar-desejo.php" method="POST" style="display:none;">
+        <input type="hidden" id="input-id-desejo" name="id_desejo" value="">
+        <input type="hidden" name="id_categoria" value="<?= $id_categoria ?>">
+    </form>
+
     <script src="../assets/js/categoria.js"></script>
+
+    <!-- MODAL DE CONFIRMAÇÃO DE APAGAR DESEJO -->
+    <div class="modal-apagar-overlay" id="modal-apagar" style="display:none;" onclick="fecharModalApagar()">
+        <div class="modal-apagar-caixa" onclick="event.stopPropagation()">
+            <div class="modal-icone">!</div>
+            <h3 class="modal-apagar-titulo">Apagar desejo?</h3>
+            <p class="modal-texto">
+                Vais apagar <strong id="modal-nome-desejo"></strong>. Esta ação é irreversível.
+            </p>
+            <div class="modal-acoes">
+                <button type="button" class="btn-cancelar" onclick="fecharModalApagar()">Não, cancelar</button>
+                <button type="button" class="btn-apagar-confirmar" onclick="confirmarApagar()">Sim, apagar</button>
+            </div>
+        </div>
+    </div>
 
 </body>
 
